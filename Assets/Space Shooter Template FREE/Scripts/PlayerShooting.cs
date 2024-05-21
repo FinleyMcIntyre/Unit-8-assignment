@@ -32,10 +32,13 @@ public class PlayerShooting : MonoBehaviour {
     [HideInInspector] public int maxweaponPower = 4; 
     public static PlayerShooting instance;
 
+    AudioManager audioManager;
+
     private void Awake()
     {
         if (instance == null)
             instance = this;
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
     private void Start()
     {
@@ -65,12 +68,14 @@ public class PlayerShooting : MonoBehaviour {
             case 1:
                 CreateLazerShot(projectileObject, guns.centralGun.transform.position, Vector3.zero);
                 guns.centralGunVFX.Play();
+                audioManager.PlaySFX(audioManager.projectile);
                 break;
             case 2:
                 CreateLazerShot(projectileObject, guns.rightGun.transform.position, Vector3.zero);
                 guns.leftGunVFX.Play();
                 CreateLazerShot(projectileObject, guns.leftGun.transform.position, Vector3.zero);
                 guns.rightGunVFX.Play();
+                audioManager.PlaySFX(audioManager.projectile);
                 break;
             case 3:
                 CreateLazerShot(projectileObject, guns.centralGun.transform.position, Vector3.zero);
@@ -78,6 +83,7 @@ public class PlayerShooting : MonoBehaviour {
                 guns.leftGunVFX.Play();
                 CreateLazerShot(projectileObject, guns.leftGun.transform.position, new Vector3(0, 0, 5));
                 guns.rightGunVFX.Play();
+                audioManager.PlaySFX(audioManager.projectile);
                 break;
             case 4:
                 CreateLazerShot(projectileObject, guns.centralGun.transform.position, Vector3.zero);
@@ -87,6 +93,7 @@ public class PlayerShooting : MonoBehaviour {
                 guns.rightGunVFX.Play();
                 CreateLazerShot(projectileObject, guns.leftGun.transform.position, new Vector3(0, 0, 15));
                 CreateLazerShot(projectileObject, guns.rightGun.transform.position, new Vector3(0, 0, -15));
+                audioManager.PlaySFX(audioManager.projectile);
                 break;
         }
     }

@@ -21,6 +21,11 @@ public class Enemy : MonoBehaviour {
     [HideInInspector] public int shotChance; //probability of 'Enemy's' shooting during tha path
     [HideInInspector] public float shotTimeMin, shotTimeMax; //max and min time for shooting from the beginning of the path
     #endregion
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     private void Start()
     {
@@ -63,5 +68,6 @@ public class Enemy : MonoBehaviour {
     {        
         Instantiate(destructionVFX, transform.position, Quaternion.identity); 
         Destroy(gameObject);
+        audioManager.PlaySFX(audioManager.explosion);
     }
 }

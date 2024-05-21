@@ -18,7 +18,8 @@ public class PlayerMoving : MonoBehaviour {
     [Tooltip("offset from viewport borders for player's movement")]
     public Borders borders;
     Camera mainCamera;
-    bool controlIsActive = true; 
+    bool controlIsActive = true;
+    public float speed = 50f;
 
     public static PlayerMoving instance; 
 
@@ -44,7 +45,7 @@ public class PlayerMoving : MonoBehaviour {
             {
                 Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition); 
                 mousePosition.z = transform.position.z;
-                transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, mousePosition, speed * Time.deltaTime);
             }
 
 
